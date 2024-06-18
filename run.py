@@ -25,5 +25,23 @@ def generate_grid(x, y):
     return y_axis
    
 
-ocean = generate_grid(X_AXIS, Y_AXIS)
-print(ocean)
+def display_battlespace(grid):
+    """
+    Displays the game area in a viewer freindly format.
+    Adds a newline if not present
+    Extracts lists and concatinates them together in a string.
+    """
+    battlespace = ''
+    for item in grid:
+        if '\n' not in item:
+            item.append('\n')
+
+    for part in grid:
+        for wave in part:
+            battlespace = battlespace + wave
+    return battlespace
+
+
+game_grid = generate_grid(X_AXIS, Y_AXIS)
+display = display_battlespace(game_grid)
+print(display)
