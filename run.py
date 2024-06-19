@@ -52,6 +52,12 @@ def take_shot(game_grid, x, y):
     else:
         game_grid[y-1][x-1] = '.'
         return game_grid, False
+
+def enemy_shot(game_grid):
+    random_x_axis = random.randint(0, X_AXIS-1)
+    random_y_axis = random.randint(0, Y_AXIS-1)
+    received_fire = take_shot(game_grid, random_x_axis, random_y_axis)
+    return received_fire
                  
 
 def display_battlespace(grid):
@@ -86,9 +92,15 @@ while fleet_size > 0:
     print(display_enemy)
     print(display_friend)
 
+    """Player shot"""
     x = int(input('Please guess the x axis: '))
     y = int(input('Please guess the y axis: '))
     enemy_ships, outcome = take_shot(enemy_ships, x, y)
+
+    """Enemy shot"""
+    received_fire = enemy_shot(friendly_ships)
+    print(received_fire)
+
     if outcome == True:
         fleet_size -=1
         print('You hit')
