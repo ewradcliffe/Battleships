@@ -72,17 +72,23 @@ def display_battlespace(grid):
     return battlespace
 
 
-game_grid = generate_grid(X_AXIS, Y_AXIS)
-
-ships = add_ships(game_grid, fleet_size)
+enemy_game_grid = generate_grid(X_AXIS, Y_AXIS)
+friendly_game_grid = generate_grid(X_AXIS, Y_AXIS)
+enemy_ships = add_ships(enemy_game_grid, fleet_size)
+friendly_ships = add_ships(friendly_game_grid, fleet_size)
 
 while fleet_size > 0:
-    display = display_battlespace(ships)
-    print(display)
+    """
+    Basic game loop.
+    """
+    display_enemy = display_battlespace(enemy_ships)
+    display_friend = display_battlespace(friendly_ships)
+    print(display_enemy)
+    print(display_friend)
 
     x = int(input('Please guess the x axis: '))
     y = int(input('Please guess the y axis: '))
-    ships, outcome = take_shot(ships, x, y)
+    enemy_ships, outcome = take_shot(enemy_ships, x, y)
     if outcome == True:
         fleet_size -=1
         print('You hit')
