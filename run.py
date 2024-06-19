@@ -60,7 +60,7 @@ def enemy_shot(game_grid):
     return received_fire
                  
 
-def display_battlespace(grid):
+def display_battlespace(side, grid):
     """
     Displays the game area in a viewer freindly format.
     Adds a newline if not present
@@ -75,6 +75,8 @@ def display_battlespace(grid):
         for wave in part:
             battlespace = battlespace + wave
 
+    print(f'{side} fleet')
+    print(battlespace)
     return battlespace
 
 
@@ -87,12 +89,8 @@ while fleet_size > 0:
     """
     Basic game loop.
     """
-    display_enemy = display_battlespace(enemy_ships)
-    display_friend = display_battlespace(friendly_ships)
-    print('Enemy fleet:')
-    print(display_enemy)
-    print('Player fleet:')
-    print(display_friend)
+    display_enemy = display_battlespace('Enemy', enemy_ships)
+    display_friend = display_battlespace('Friendly', friendly_ships)
 
     """Player shot"""
     x = int(input('Please guess the x axis: '))
