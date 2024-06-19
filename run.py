@@ -95,16 +95,21 @@ while fleet_size > 0:
     """Player shot"""
     x = int(input('Please guess the x axis: '))
     y = int(input('Please guess the y axis: '))
-    enemy_ships, outcome = take_shot(enemy_ships, x, y)
+    enemy_ships, freindly_fire = take_shot(enemy_ships, x, y)
 
     """Enemy shot"""
-    received_fire = enemy_shot(friendly_ships)
+    friendly_ships, enemy_fire  = enemy_shot(friendly_ships)
   
 
-    if outcome is True:
+    if freindly_fire is True and enemy_fire is True:
         fleet_size -=1
-        print('You hit')
-    else:
-        print('You missed')
+        print('\nYou hit, the enemy hit.')
+    elif freindly_fire is True and enemy_fire is False:
+        fleet_size -=1
+        print('\nYou hit, the enemy missed.')
+    elif freindly_fire is False and enemy_fire is True:
+        print('\nYou missed, the enemy hit.')
+    elif freindly_fire is False and enemy_fire is False:
+        print('\nYou missed, the enemy missed.')
 
 
