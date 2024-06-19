@@ -41,18 +41,18 @@ def add_ships(game_grid, ships):
 
     return game_grid
 
-def take_shot(ocean, x, y):
+def take_shot(game_grid, x, y):
     """
     Function to resolve player shot. 
     Takes player guess of x and y axis and compares them with the grid.
     """
-    if ocean[y-1][x-1] == '0':
-        ocean[y-1][x-1] = 'x'
-        return 'hit'
+    if game_grid[y-1][x-1] == '0':
+        game_grid[y-1][x-1] = 'x'
+        return game_grid, True
     else:
-        ocean[y-1][x-1] = '.'
-        return 'miss'    
-
+        game_grid[y-1][x-1] = '.'
+        return game_grid, False
+                 
 
 def display_battlespace(grid):
     """
@@ -76,11 +76,17 @@ game_grid = generate_grid(X_AXIS, Y_AXIS)
 
 ships = add_ships(game_grid, fleet_size)
 
-display = display_battlespace(ships)
-print(display)
+while fleet_size > 0:
+    display = display_battlespace(ships)
+    print(display)
 
-x = int(input('Please guess the x axis: '))
-y = int(input('Please guess the y axis: '))
-ships = take_shot(ships, x, y)
+    x = int(input('Please guess the x axis: '))
+    y = int(input('Please guess the y axis: '))
+    ships, outcome = take_shot(ships, x, y)
+    if outcome == True:
+        fleet_size -=1
+        print('You hit')
+    else:
+        print('You missed')
 
-print(ships)
+
