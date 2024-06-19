@@ -89,7 +89,9 @@ while fleet_size > 0:
     """
     display_enemy = display_battlespace(enemy_ships)
     display_friend = display_battlespace(friendly_ships)
+    print('Enemy fleet:')
     print(display_enemy)
+    print('Player fleet:')
     print(display_friend)
 
     """Player shot"""
@@ -99,9 +101,9 @@ while fleet_size > 0:
 
     """Enemy shot"""
     received_fire = enemy_shot(friendly_ships)
-    print(received_fire)
+  
 
-    if outcome == True:
+    if outcome is True:
         fleet_size -=1
         print('You hit')
     else:
