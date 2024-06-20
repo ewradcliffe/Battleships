@@ -115,9 +115,33 @@ def combat(fleet_size, enemy_ships, friendly_ships):
 
     return enemy_fleet_size, friendly_fleet_size
 
+def choose_game(choice):
+    if choice == 1:
+        x_axis = 5
+        y_axis = 3
+        fleet_size = 1 
+    elif choice == 2:
+        x_axis = 10
+        y_axis = 5
+        fleet_size = 3 
+    elif choice == 3:
+        x_axis = 20
+        y_axis = 10
+        fleet_size = 5
+    else:
+        print('error')
+    return x_axis, y_axis, fleet_size
 
-size = Game_size(10, 5, 3) 
+"""
+Start of game here:
+"""
+print('Welcome to battleships. The game of daring combat on the high seas.')
+print('Please select a game level to continue:')
+print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n')
+choice = int(input('What size game would you like to play? '))
 
+x_axis, y_axis, fleet_size = choose_game(choice)
+size = Game_size(x_axis, y_axis, fleet_size)
 
 enemy_game_grid = generate_grid(size.x_axis, size.y_axis)
 friendly_game_grid = generate_grid(size.x_axis, size.y_axis)
@@ -131,4 +155,3 @@ elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
     print('All your ships got sunk. You lost!')
 elif enemy_fleet_size == 0 and friendly_fleet_size == 0:
     print('All the ships got sunk! Everyone loses!')
-
