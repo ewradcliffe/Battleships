@@ -1,12 +1,13 @@
 import random
 
-"""
-Global variables
-"""
-
-X_AXIS = 10	
-Y_AXIS = 5
-fleet_size = 3
+class Game_size:
+    """
+    Class to regulate the size of the game
+    """
+    def __init__(self, x_axis, y_axis, fleet_size):
+        self.x_axis = x_axis
+        self.y_axis = y_axis
+        self.fleet_size = fleet_size
 
 def generate_grid(x, y):
     """
@@ -31,8 +32,8 @@ def add_ships(game_grid, ships):
     Add ships to the grid. Randomly selects an index for the y axis and x axis and inserts an '0'
     """
     while ships > 0:
-            random_x_axis = random.randint(0, X_AXIS-1)
-            random_y_axis = random.randint(0, Y_AXIS-1)
+            random_x_axis = random.randint(0, size.x_axis-1)
+            random_y_axis = random.randint(0, size.y_axis-1)
             if game_grid[random_y_axis][random_x_axis] == '0':
                 continue
             else:
@@ -54,8 +55,8 @@ def take_shot(game_grid, x, y):
         return game_grid, False
 
 def enemy_shot(game_grid):
-    random_x_axis = random.randint(0, X_AXIS-1)
-    random_y_axis = random.randint(0, Y_AXIS-1)
+    random_x_axis = random.randint(0, size.x_axis-1)
+    random_y_axis = random.randint(0, size.y_axis-1)
     received_fire = take_shot(game_grid, random_x_axis, random_y_axis)
     return received_fire
                  
@@ -115,19 +116,19 @@ def combat(fleet_size, enemy_ships, friendly_ships):
     return enemy_fleet_size, friendly_fleet_size
 
 
-enemy_game_grid = generate_grid(X_AXIS, Y_AXIS)
-friendly_game_grid = generate_grid(X_AXIS, Y_AXIS)
-enemy_ships = add_ships(enemy_game_grid, fleet_size)
-friendly_ships = add_ships(friendly_game_grid, fleet_size)
+size = Game_size(10, 5, 3) 
 
-enemy_fleet_size, friendly_fleet_size = combat(fleet_size, enemy_ships, friendly_ships)
+
+enemy_game_grid = generate_grid(size.x_axis, size.y_axis)
+friendly_game_grid = generate_grid(size.x_axis, size.y_axis)
+enemy_ships = add_ships(enemy_game_grid, size.fleet_size)
+friendly_ships = add_ships(friendly_game_grid, size.fleet_size)
+
+enemy_fleet_size, friendly_fleet_size = combat(size.fleet_size, enemy_ships, friendly_ships)
 if enemy_fleet_size == 0 and friendly_fleet_size > 0:
     print('You won! You sunk the enemy fleet. Well done!')
 elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
     print('All your ships got sunk. You lost!')
 elif enemy_fleet_size == 0 and friendly_fleet_size == 0:
     print('All the ships got sunk! Everyone loses!')
-
-
-
 
