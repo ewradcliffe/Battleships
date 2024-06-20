@@ -80,7 +80,7 @@ def display_battlespace(side, grid):
     return battlespace
 
 
-def main_game(fleet_size, enemy_ships, friendly_ships):
+def combat(fleet_size, enemy_ships, friendly_ships):
     """
     Loop for the main game
     """
@@ -88,7 +88,6 @@ def main_game(fleet_size, enemy_ships, friendly_ships):
     friendly_fleet_size = fleet_size
 
     while enemy_fleet_size > 0 and friendly_fleet_size > 0:
-        print(enemy_fleet_size, friendly_fleet_size)
         display_enemy = display_battlespace('Enemy', enemy_ships)
         display_friend = display_battlespace('Friendly', friendly_ships)
 
@@ -113,12 +112,22 @@ def main_game(fleet_size, enemy_ships, friendly_ships):
         elif freindly_fire is False and enemy_fire is False:
             print('\nYou missed, the enemy missed.')
 
+    return enemy_fleet_size, friendly_fleet_size
+
 
 enemy_game_grid = generate_grid(X_AXIS, Y_AXIS)
 friendly_game_grid = generate_grid(X_AXIS, Y_AXIS)
 enemy_ships = add_ships(enemy_game_grid, fleet_size)
 friendly_ships = add_ships(friendly_game_grid, fleet_size)
 
-main_game(fleet_size, enemy_ships, friendly_ships)
+enemy_fleet_size, friendly_fleet_size = combat(fleet_size, enemy_ships, friendly_ships)
+if enemy_fleet_size == 0 and friendly_fleet_size > 0:
+    print('You won! You sunk the enemy fleet. Well done!')
+elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
+    print('All your ships got sunk. You lost!')
+elif enemy_fleet_size == 0 and friendly_fleet_size == 0:
+    print('All the ships got sunk! Everyone loses!')
+
+
 
 
