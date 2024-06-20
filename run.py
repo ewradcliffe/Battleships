@@ -80,36 +80,45 @@ def display_battlespace(side, grid):
     return battlespace
 
 
+def main_game(fleet_size, enemy_ships, friendly_ships):
+    """
+    Loop for the main game
+    """
+    enemy_fleet_size = fleet_size
+    friendly_fleet_size = fleet_size
+
+    while enemy_fleet_size > 0 and friendly_fleet_size > 0:
+        print(enemy_fleet_size, friendly_fleet_size)
+        display_enemy = display_battlespace('Enemy', enemy_ships)
+        display_friend = display_battlespace('Friendly', friendly_ships)
+
+        """Player shot"""
+        x = int(input('Please guess the x axis: '))
+        y = int(input('Please guess the y axis: '))
+        enemy_ships, freindly_fire = take_shot(enemy_ships, x, y)
+
+        """Enemy shot"""
+        friendly_ships, enemy_fire  = enemy_shot(friendly_ships)
+    
+        if freindly_fire is True and enemy_fire is True:
+            enemy_fleet_size -=1
+            friendly_fleet_size -=1
+            print('\nYou hit, the enemy hit.')
+        elif freindly_fire is True and enemy_fire is False:
+            enemy_fleet_size -=1
+            print('\nYou hit, the enemy missed.')
+        elif freindly_fire is False and enemy_fire is True:
+            print('\nYou missed, the enemy hit.')
+            friendly_fleet_size -=1
+        elif freindly_fire is False and enemy_fire is False:
+            print('\nYou missed, the enemy missed.')
+
+
 enemy_game_grid = generate_grid(X_AXIS, Y_AXIS)
 friendly_game_grid = generate_grid(X_AXIS, Y_AXIS)
 enemy_ships = add_ships(enemy_game_grid, fleet_size)
 friendly_ships = add_ships(friendly_game_grid, fleet_size)
 
-while fleet_size > 0:
-    """
-    Basic game loop.
-    """
-    display_enemy = display_battlespace('Enemy', enemy_ships)
-    display_friend = display_battlespace('Friendly', friendly_ships)
-
-    """Player shot"""
-    x = int(input('Please guess the x axis: '))
-    y = int(input('Please guess the y axis: '))
-    enemy_ships, freindly_fire = take_shot(enemy_ships, x, y)
-
-    """Enemy shot"""
-    friendly_ships, enemy_fire  = enemy_shot(friendly_ships)
-  
-
-    if freindly_fire is True and enemy_fire is True:
-        fleet_size -=1
-        print('\nYou hit, the enemy hit.')
-    elif freindly_fire is True and enemy_fire is False:
-        fleet_size -=1
-        print('\nYou hit, the enemy missed.')
-    elif freindly_fire is False and enemy_fire is True:
-        print('\nYou missed, the enemy hit.')
-    elif freindly_fire is False and enemy_fire is False:
-        print('\nYou missed, the enemy missed.')
+main_game(fleet_size, enemy_ships, friendly_ships)
 
 
