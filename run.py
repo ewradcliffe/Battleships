@@ -47,6 +47,7 @@ def take_shot(game_grid, x, y):
     Function to resolve player shot. 
     Takes player guess of x and y axis and compares them with the grid.
     """
+
     if game_grid[y-1][x-1] == '0':
         game_grid[y-1][x-1] = 'x'
         return game_grid, True
@@ -81,7 +82,7 @@ def display_battlespace(side, grid):
     return battlespace
 
 
-def combat(fleet_size, enemy_ships, friendly_ships):
+def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     """
     Loop for the main game
     """
@@ -95,6 +96,11 @@ def combat(fleet_size, enemy_ships, friendly_ships):
         """Player shot"""
         x = int(input('Please guess the x axis: '))
         y = int(input('Please guess the y axis: '))
+        while x > x_axis or y > y_axis:
+            print('Choice too high. Please guess lower.')
+            x = int(input('Please guess the x axis: '))
+            y = int(input('Please guess the y axis: '))
+
         enemy_ships, freindly_fire = take_shot(enemy_ships, x, y)
 
         """Enemy shot"""
@@ -155,7 +161,7 @@ friendly_game_grid = generate_grid(size.x_axis, size.y_axis)
 enemy_ships = add_ships(enemy_game_grid, size.fleet_size)
 friendly_ships = add_ships(friendly_game_grid, size.fleet_size)
 
-enemy_fleet_size, friendly_fleet_size = combat(size.fleet_size, enemy_ships, friendly_ships)
+enemy_fleet_size, friendly_fleet_size = combat(size.fleet_size, enemy_ships, friendly_ships, size.x_axis, size.y_axis)
 if enemy_fleet_size == 0 and friendly_fleet_size > 0:
     print('You won! You sunk the enemy fleet. Well done!')
 elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
