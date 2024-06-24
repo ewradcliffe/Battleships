@@ -96,8 +96,11 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         """Player shot"""
         x = int(input('Please guess the x axis: '))
         y = int(input('Please guess the y axis: '))
-        while x > x_axis or y > y_axis:
-            print('Choice too high. Please guess lower.')
+        while x <= 0 or x > x_axis or y <= 0 or y > y_axis:
+            if x <= 0 or x > x_axis:
+                print(f'Guess out of range. Please guess between 1 and {x_axis}.')
+            else:
+                print(f'Guess out of range. Please guess between 1 and {y_axis}.')
             x = int(input('Please guess the x axis: '))
             y = int(input('Please guess the y axis: '))
 
@@ -125,7 +128,7 @@ def choose_game(choice):
     """
     Function to select game size.
     """
-    while choice > 3:
+    while choice <= 0 or choice > 3:
         print('Invalid choice. Please choose a number between 1 and 3.')
         choice = int(input('What size game would you like to play? '))
 
