@@ -116,6 +116,13 @@ def combat(fleet_size, enemy_ships, friendly_ships):
     return enemy_fleet_size, friendly_fleet_size
 
 def choose_game(choice):
+    """
+    Function to select game size.
+    """
+    while choice > 3:
+        print('Invalid choice. Please choose a number between 1 and 3.')
+        choice = int(input('What size game would you like to play? '))
+
     if choice == 1:
         x_axis = 5
         y_axis = 3
