@@ -128,10 +128,6 @@ def choose_game(choice):
     """
     Function to select game size.
     """
-    while choice <= 0 or choice > 3:
-        print('Invalid choice. Please choose a number between 1 and 3.')
-        choice = int(input('What size game would you like to play? '))
-
     if choice == 1:
         x_axis = 5
         y_axis = 3
@@ -144,8 +140,7 @@ def choose_game(choice):
         x_axis = 20
         y_axis = 10
         fleet_size = 5
-    else:
-        print('error')
+        
     return x_axis, y_axis, fleet_size
 
 """
@@ -154,9 +149,19 @@ Start of game here:
 print('Welcome to battleships. The game of daring combat on the high seas.')
 print('Please select a game level to continue:')
 print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n')
-choice = int(input('What size game would you like to play? '))
+choice = input('What size game would you like to play? ')
 
-x_axis, y_axis, fleet_size = choose_game(choice)
+while choice.isnumeric() == False or choice <= '0' or choice > '3':
+    if choice.isnumeric():
+        print('Invalid choice. Please choose a number between 1 and 3.')
+        choice = input('What size game would you like to play? ')
+    else:
+        print('Error. Please enter a number')
+        choice = input('What size game would you like to play? ')
+    
+x_axis, y_axis, fleet_size = choose_game(int(choice))
+
+
 size = Game_size(x_axis, y_axis, fleet_size)
 
 enemy_game_grid = generate_grid(size.x_axis, size.y_axis)
