@@ -50,7 +50,7 @@ class GameSize:
     """
     Add ships to the grid. Randomly selects an index for the y axis and x axis and inserts an '0'
     """
-    def add_ships(game_grid, ships):
+    def add_ships(game_grid, ships, x_axis, y_axis):
 
         while ships > 0:
                 random_x_axis = random.randint(0, x_axis-1)
@@ -150,39 +150,49 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 
     return enemy_fleet_size, friendly_fleet_size
 
+
+def start_game(play):
+    if play.lower() == 'q':
+        print('Thanks for playing, goodbye!')
+        quit()
+    else:    
+        print('Please select a game level to continue:')
+        print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n')
+        choice = input('What size game would you like to play? ')
+
+        while choice.isnumeric() == False or choice <= '0' or choice > '3':
+            if choice.isnumeric():
+                print('Invalid choice. Please choose a number between 1 and 3.')
+                choice = input('What size game would you like to play? ')
+            else:
+                print('Error. Please enter a number')
+                choice = input('What size game would you like to play? ')
+
+
+        x_axis, y_axis, fleet_size = GameSize.choose_game(int(choice))
+        """Generate a sea each for player and enemy"""
+        enemy_sea = GameSize.generate_grid(x_axis, y_axis)
+        friendly_sea = GameSize.generate_grid(x_axis, y_axis)
+
+
+        """Add ships to player and enemy seas"""
+        enemy_ships = GameSize.add_ships(enemy_sea, fleet_size, x_axis, y_axis)
+        friendly_ships = GameSize.add_ships(friendly_sea, fleet_size, x_axis, y_axis)
+
+        """Resolve combat"""
+        enemy_fleet_size, friendly_fleet_size = combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis)
+        if enemy_fleet_size == 0 and friendly_fleet_size > 0:
+            print('You won! You sunk the enemy fleet. Well done!')
+        elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
+            print('All your ships got sunk. You lost!')
+        elif enemy_fleet_size == 0 and friendly_fleet_size == 0:
+            print('All the ships got sunk! Everyone loses!')
 """
 Start of game here:
 """
-print('Welcome to battleships. The game of daring combat on the high seas.')
-print('Please select a game level to continue:')
-print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n')
-choice = input('What size game would you like to play? ')
+print('Welcome to battleships. The game of daring combat on the high seas. Would you like to play?')
+play = input("Press any key to play, or press 'Q' to quit: ")
+start_game(play)
+input
 
-while choice.isnumeric() == False or choice <= '0' or choice > '3':
-    if choice.isnumeric():
-        print('Invalid choice. Please choose a number between 1 and 3.')
-        choice = input('What size game would you like to play? ')
-    else:
-        print('Error. Please enter a number')
-        choice = input('What size game would you like to play? ')
-
-
-x_axis, y_axis, fleet_size = GameSize.choose_game(int(choice))
-"""Generate a sea each for player and enemy"""
-enemy_sea = GameSize.generate_grid(x_axis, y_axis)
-friendly_sea = GameSize.generate_grid(x_axis, y_axis)
-
-
-"""Add ships to player and enemy seas"""
-enemy_ships = GameSize.add_ships(enemy_sea, fleet_size)
-friendly_ships = GameSize.add_ships(friendly_sea, fleet_size)
-
-"""Resolve combat"""
-enemy_fleet_size, friendly_fleet_size = combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis)
-if enemy_fleet_size == 0 and friendly_fleet_size > 0:
-    print('You won! You sunk the enemy fleet. Well done!')
-elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
-    print('All your ships got sunk. You lost!')
-elif enemy_fleet_size == 0 and friendly_fleet_size == 0:
-    print('All the ships got sunk! Everyone loses!')
 
