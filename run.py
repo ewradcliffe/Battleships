@@ -151,11 +151,8 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     return enemy_fleet_size, friendly_fleet_size
 
 
-def start_game(play):
-    if play.lower() == 'q':
-        print('Thanks for playing, goodbye!')
-        quit()
-    else:    
+def main_game(play):
+    while play.lower() != 'q':
         print('Please select a game level to continue:')
         print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n')
         choice = input('What size game would you like to play? ')
@@ -168,12 +165,10 @@ def start_game(play):
                 print('Error. Please enter a number')
                 choice = input('What size game would you like to play? ')
 
-
         x_axis, y_axis, fleet_size = GameSize.choose_game(int(choice))
         """Generate a sea each for player and enemy"""
         enemy_sea = GameSize.generate_grid(x_axis, y_axis)
         friendly_sea = GameSize.generate_grid(x_axis, y_axis)
-
 
         """Add ships to player and enemy seas"""
         enemy_ships = GameSize.add_ships(enemy_sea, fleet_size, x_axis, y_axis)
@@ -181,18 +176,25 @@ def start_game(play):
 
         """Resolve combat"""
         enemy_fleet_size, friendly_fleet_size = combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis)
+
+        """Track combat. game ends when one player looses all their ships."""       
         if enemy_fleet_size == 0 and friendly_fleet_size > 0:
             print('You won! You sunk the enemy fleet. Well done!')
         elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
             print('All your ships got sunk. You lost!')
         elif enemy_fleet_size == 0 and friendly_fleet_size == 0:
             print('All the ships got sunk! Everyone loses!')
+
+        """Check to see if player wants to play again"""
+        play = input("Would you like to play again? Press any key to continue, or enter 'Q' to quit: ")
+        
+
 """
 Start of game here:
 """
 print('Welcome to battleships. The game of daring combat on the high seas. Would you like to play?')
-play = input("Press any key to play, or press 'Q' to quit: ")
-start_game(play)
-input
+play = input("Press any key to play, or enter 'Q' to quit: ")
+main_game(play)
+print("Thanks for playing. Goodbye!")
 
 
