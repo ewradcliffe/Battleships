@@ -1,6 +1,6 @@
 import random
 
-class Game_size:
+class GameSize:
     """
     Class to regulate the size of the game
     """
@@ -9,38 +9,60 @@ class Game_size:
         self.y_axis = y_axis
         self.fleet_size = fleet_size
 
-def generate_grid(x, y):
     """
-    generates a list of lists based on x and y inputs.
+    Function to select game size.
     """
-    y_axis = []
-    i = 0
-    while y > i:
-        i +=1
-        x_axis = []
-        j = 0
-        while x > j:
-            x_axis.append('^')
-            j +=1
-        y_axis.append(x_axis)
+    def choose_game(choice):
 
-    return y_axis
-   
+        if choice == 1:
+            x_axis = 5
+            y_axis = 3
+            fleet_size = 1 
+        elif choice == 2:
+            x_axis = 10
+            y_axis = 5
+            fleet_size = 3 
+        elif choice == 3:
+            x_axis = 20
+            y_axis = 10
+            fleet_size = 5
+            
+        return x_axis, y_axis, fleet_size
 
-def add_ships(game_grid, ships):
+    """
+    Generates a list of lists based on x and y axis generated above.
+    """
+    def generate_grid(x, y):
+
+        y_axis = []
+        i = 0
+        while y > i:
+            i +=1
+            x_axis = []
+            j = 0
+            while x > j:
+                x_axis.append('^')
+                j +=1
+            y_axis.append(x_axis)
+
+        return y_axis
+
     """
     Add ships to the grid. Randomly selects an index for the y axis and x axis and inserts an '0'
     """
-    while ships > 0:
-            random_x_axis = random.randint(0, size.x_axis-1)
-            random_y_axis = random.randint(0, size.y_axis-1)
-            if game_grid[random_y_axis][random_x_axis] == '0':
-                continue
-            else:
-                game_grid[random_y_axis][random_x_axis] = '0'
-                ships -= 1
+    def add_ships(game_grid, ships):
 
-    return game_grid
+        while ships > 0:
+                random_x_axis = random.randint(0, x_axis-1)
+                random_y_axis = random.randint(0, y_axis-1)
+                if game_grid[random_y_axis][random_x_axis] == '0':
+                    continue
+                else:
+                    game_grid[random_y_axis][random_x_axis] = '0'
+                    ships -= 1
+
+        return game_grid
+
 
 def take_shot(game_grid, x, y):
     """
@@ -55,9 +77,13 @@ def take_shot(game_grid, x, y):
         game_grid[y-1][x-1] = '.'
         return game_grid, False
 
-def enemy_shot(game_grid):
-    random_x_axis = random.randint(0, size.x_axis-1)
-    random_y_axis = random.randint(0, size.y_axis-1)
+
+def enemy_shot(game_grid, x_axis, y_axis):
+    """
+    Function for enemy shooting. Picks a grid square at random.
+    """
+    random_x_axis = random.randint(0, x_axis-1)
+    random_y_axis = random.randint(0, y_axis-1)
     received_fire = take_shot(game_grid, random_x_axis, random_y_axis)
     return received_fire
                  
@@ -107,7 +133,7 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         enemy_ships, freindly_fire = take_shot(enemy_ships, x, y)
 
         """Enemy shot"""
-        friendly_ships, enemy_fire  = enemy_shot(friendly_ships)
+        friendly_ships, enemy_fire  = enemy_shot(friendly_ships, x_axis, y_axis)
     
         if freindly_fire is True and enemy_fire is True:
             enemy_fleet_size -=1
@@ -124,25 +150,6 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 
     return enemy_fleet_size, friendly_fleet_size
 
-def choose_game(choice):
-    """
-    Function to select game size.
-    """
-    if choice == 1:
-        x_axis = 5
-        y_axis = 3
-        fleet_size = 1 
-    elif choice == 2:
-        x_axis = 10
-        y_axis = 5
-        fleet_size = 3 
-    elif choice == 3:
-        x_axis = 20
-        y_axis = 10
-        fleet_size = 5
-        
-    return x_axis, y_axis, fleet_size
-
 """
 Start of game here:
 """
@@ -158,21 +165,24 @@ while choice.isnumeric() == False or choice <= '0' or choice > '3':
     else:
         print('Error. Please enter a number')
         choice = input('What size game would you like to play? ')
-    
-x_axis, y_axis, fleet_size = choose_game(int(choice))
 
 
-size = Game_size(x_axis, y_axis, fleet_size)
+x_axis, y_axis, fleet_size = GameSize.choose_game(int(choice))
+"""Generate a sea each for player and enemy"""
+enemy_sea = GameSize.generate_grid(x_axis, y_axis)
+friendly_sea = GameSize.generate_grid(x_axis, y_axis)
 
-enemy_game_grid = generate_grid(size.x_axis, size.y_axis)
-friendly_game_grid = generate_grid(size.x_axis, size.y_axis)
-enemy_ships = add_ships(enemy_game_grid, size.fleet_size)
-friendly_ships = add_ships(friendly_game_grid, size.fleet_size)
 
-enemy_fleet_size, friendly_fleet_size = combat(size.fleet_size, enemy_ships, friendly_ships, size.x_axis, size.y_axis)
+"""Add ships to player and enemy seas"""
+enemy_ships = GameSize.add_ships(enemy_sea, fleet_size)
+friendly_ships = GameSize.add_ships(friendly_sea, fleet_size)
+
+"""Resolve combat"""
+enemy_fleet_size, friendly_fleet_size = combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis)
 if enemy_fleet_size == 0 and friendly_fleet_size > 0:
     print('You won! You sunk the enemy fleet. Well done!')
 elif enemy_fleet_size > 0 and friendly_fleet_size == 0:
     print('All your ships got sunk. You lost!')
 elif enemy_fleet_size == 0 and friendly_fleet_size == 0:
     print('All the ships got sunk! Everyone loses!')
+
