@@ -90,7 +90,7 @@ def enemy_shot(game_grid, x_axis, y_axis):
 
 def display_battlespace(side, grid):
     """
-    Displays the game area in a viewer freindly format.
+    Displays the game area in a viewer friendly format.
     Adds a newline if not present
     Extracts lists and concatinates them together in a string.
     """
@@ -120,32 +120,40 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         display_friend = display_battlespace('Friendly', friendly_ships)
 
         """Player shot"""
-        x = int(input('Please guess the x axis: '))
-        y = int(input('Please guess the y axis: '))
-        while x <= 0 or x > x_axis or y <= 0 or y > y_axis:
-            if x <= 0 or x > x_axis:
-                print(f'Guess out of range. Please guess between 1 and {x_axis}.')
+        player_shot_valid = False
+        while player_shot_valid == False:
+            x = input('Please guess the x axis: ')
+            y = input('Please guess the y axis: ')
+            if x.isnumeric() and y.isnumeric():
+                x = int(x)
+                y =int(y)
+                if x <= 0 or x > x_axis:
+                    print(f'X axis guess out of range. Please guess between 1 and {x_axis}.')
+                elif y <= 0 or y > y_axis:
+                    print(f'Y axis guess out of range. Please guess between 1 and {y_axis}.')
+                else:
+                    print('valid guess')
+                    player_shot_valid = True
             else:
-                print(f'Guess out of range. Please guess between 1 and {y_axis}.')
-            x = int(input('Please guess the x axis: '))
-            y = int(input('Please guess the y axis: '))
+                print('Guess must be a number. Not a letter or special character')
 
-        enemy_ships, freindly_fire = take_shot(enemy_ships, x, y)
+
+        enemy_ships, friendly_fire = take_shot(enemy_ships, x, y)
 
         """Enemy shot"""
         friendly_ships, enemy_fire  = enemy_shot(friendly_ships, x_axis, y_axis)
     
-        if freindly_fire is True and enemy_fire is True:
+        if friendly_fire is True and enemy_fire is True:
             enemy_fleet_size -=1
             friendly_fleet_size -=1
             print('\nYou hit, the enemy hit.')
-        elif freindly_fire is True and enemy_fire is False:
+        elif friendly_fire is True and enemy_fire is False:
             enemy_fleet_size -=1
             print('\nYou hit, the enemy missed.')
-        elif freindly_fire is False and enemy_fire is True:
+        elif friendly_fire is False and enemy_fire is True:
             print('\nYou missed, the enemy hit.')
             friendly_fleet_size -=1
-        elif freindly_fire is False and enemy_fire is False:
+        elif friendly_fire is False and enemy_fire is False:
             print('\nYou missed, the enemy missed.')
 
     return enemy_fleet_size, friendly_fleet_size
