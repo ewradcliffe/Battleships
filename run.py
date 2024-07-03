@@ -120,9 +120,11 @@ def hide_fleet(fleet):
     
     for ship in copy_enemy_ships:
         for section in ship:
+            x = 0
             if section == '0':
                 ship.remove('0')
-                ship.append('^')
+                ship.insert(x, '^')
+                x += 1
    
     return copy_enemy_ships
 
