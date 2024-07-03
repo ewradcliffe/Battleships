@@ -88,7 +88,7 @@ def enemy_shot(game_grid, x_axis, y_axis):
     return received_fire
                  
 
-def display_battlespace(side, grid):
+def display_battlespace(grid):
     """
     Displays the game area in a viewer friendly format.
     Adds a newline if not present
@@ -103,10 +103,25 @@ def display_battlespace(side, grid):
         for wave in part:
             battlespace = battlespace + wave
 
-    print(f'{side} fleet')
-    print(battlespace)
     return battlespace
 
+def hide_fleet(fleet):
+    """
+    Hides the ships on the enemy grid.
+    """
+    copy_enemy_ships =[]
+
+    for line in fleet:
+            x = line.copy()
+            copy_enemy_ships.append(x)
+    
+    for ship in copy_enemy_ships:
+        for section in ship:
+            if section == '0':
+                ship.remove('0')
+                ship.append('^')
+   
+    return copy_enemy_ships
 
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     """
@@ -116,8 +131,21 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     friendly_fleet_size = fleet_size
 
     while enemy_fleet_size > 0 and friendly_fleet_size > 0:
-        display_enemy = display_battlespace('Enemy', enemy_ships)
-        display_friend = display_battlespace('Friendly', friendly_ships)
+        hidden = hide_fleet(enemy_ships)
+        hidden_enemy = display_battlespace(hidden)
+        display_enemy = display_battlespace(enemy_ships)
+        
+        display_friend = display_battlespace(friendly_ships)
+
+        """
+        Uncomment the print statement below to see where the enemy ships are located.
+        print(display_enemy)
+        """
+        print(display_enemy)
+        print('Enemy Fleet:')
+        print(hidden_enemy)
+        print('Friendly Fleet:')
+        print(display_friend)
 
         """Player shot"""
         player_shot_valid = False
