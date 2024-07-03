@@ -26,6 +26,9 @@ class GameSize:
             x_axis = 20
             y_axis = 10
             fleet_size = 5
+        elif choice == 4:
+            print('Thanks for playing. See you next time!')
+            quit()
             
         return x_axis, y_axis, fleet_size
 
@@ -160,7 +163,6 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
                 elif y <= 0 or y > y_axis:
                     print(f'Y axis guess out of range. Please guess between 1 and {y_axis}.')
                 else:
-                    print('valid guess')
                     player_shot_valid = True
             else:
                 print('Guess must be a number. Not a letter or special character')
@@ -190,18 +192,22 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 def main_game(play):
     while play.lower() != 'q':
         print('Please select a game level to continue:')
-        print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n')
-        choice = input('What size game would you like to play? ')
+        print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n4. Quit')
 
-        while choice.isnumeric() == False or choice <= '0' or choice > '3':
+        game_selection = False
+        while game_selection == False:
+            choice = input('What size game would you like to play? ')
             if choice.isnumeric():
-                print('Invalid choice. Please choose a number between 1 and 3.')
-                choice = input('What size game would you like to play? ')
+                choice = int(choice)
+                if choice < 1 or choice > 4:
+                    print('Invalid choice. Please choose a number between 1 and 4.')
+                else:
+                    game_selection = True
             else:
                 print('Error. Please enter a number')
-                choice = input('What size game would you like to play? ')
 
-        x_axis, y_axis, fleet_size = GameSize.choose_game(int(choice))
+        x_axis, y_axis, fleet_size = GameSize.choose_game(choice)
+        
         """Generate a sea each for player and enemy"""
         enemy_sea = GameSize.generate_grid(x_axis, y_axis)
         friendly_sea = GameSize.generate_grid(x_axis, y_axis)

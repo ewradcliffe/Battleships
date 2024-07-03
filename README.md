@@ -30,3 +30,8 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 ---
 
 Happy coding!
+
+
+
+#### Testing. 
+The initial code written to select the size of the game tested the input to see if the entry was an intager, and if so if it was equal to or less than zero, or greater than three (i.e. a test to see if the input was anything other than an integer of value 1, 2, or three). This worked in most cases. In testing however, numbers between 10 and 29 were able to get through this test (why??). I therefore rewrote the code.
