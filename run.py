@@ -119,12 +119,12 @@ def hide_fleet(fleet):
             copy_enemy_ships.append(x)
     
     for ship in copy_enemy_ships:
+        index = 0
         for section in ship:
-            x = 0
             if section == '0':
                 ship.remove('0')
-                ship.insert(x, '^')
-                x += 1
+                ship.insert(index, '^')
+            index += 1
    
     return copy_enemy_ships
 
@@ -146,7 +146,6 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         Uncomment the print statement below to see where the enemy ships are located.
         print(display_enemy)
         """
-        print(display_enemy)
         print('Enemy Fleet:')
         print(hidden_enemy)
         print('Friendly Fleet:')
