@@ -156,21 +156,21 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         print(display_friend)
 
         """Player shot"""
-        player_shot_valid = False
-        while player_shot_valid == False:
+        invalid_guess = True
+        while invalid_guess:
             x = input('Please guess the x axis: ')
             y = input('Please guess the y axis: ')
             if x.isnumeric() and y.isnumeric():
                 x = int(x)
                 y = int(y)
                 if x <= 0 or x > x_axis:
-                    print(f'X axis guess out of range.'
-                          ' Please guess between 1 and {x_axis}.')
+                    print('X axis guess out of range.'
+                          f' Please guess between 1 and {x_axis}.')
                 elif y <= 0 or y > y_axis:
-                    print(f'Y axis guess out of range.'
-                          ' Please guess between 1 and {y_axis}.')
+                    print('Y axis guess out of range.'
+                          f' Please guess between 1 and {y_axis}.')
                 else:
-                    player_shot_valid = True
+                    invalid_guess = False
             else:
                 print('Guess must be a number.'
                       ' Not a letter or special character')
@@ -204,8 +204,8 @@ def main_game():
         print('Please select a game level to continue:')
         print('\n1. Midshipman.\n2. Captain.\n3. Admiral.\n4. Quit')
 
-        game_selection = False
-        while game_selection == False:
+        invalid_input = True
+        while invalid_input:
             choice = input('\nWhat size game would you like to play? ')
             if choice.isnumeric():
                 choice = int(choice)
@@ -213,7 +213,7 @@ def main_game():
                     print('Invalid choice.'
                           ' Please choose a number between 1 and 4.')
                 else:
-                    game_selection = True
+                    invalid_input = False
             else:
                 print('Error. Please enter a number')
 
