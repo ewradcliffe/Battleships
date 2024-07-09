@@ -218,9 +218,9 @@ def main_game():
                 print('Error. Please enter a number')
 
         x_axis, y_axis, fleet_size = GameSize.choose_game(choice)
-        print(f'\nTo shoot, please enter coordinates.'
-              '\n\nPlease guess between 1 and {x_axis} '
-              'for the x axis, and 1 and {y_axis} for the y axis.\n')
+        print('\nTo shoot, please enter coordinates.'
+              f'\n\nPlease guess between 1 and {x_axis} '
+              f'for the x axis, and 1 and {y_axis} for the y axis.\n')
 
         """Generate a sea each for player and enemy"""
         enemy_sea = GameSize.generate_grid(x_axis, y_axis)
