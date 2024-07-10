@@ -36,6 +36,12 @@ So the grid will be displayed in a visually interesting way, and to support the 
 Whilst hosting the game in the command terminal necessarily limits the scope for design, I have chosen to make use of naval terminology to give users some level of immersion. When selecting game size the options are 'Midshipman', 'Captain' or 'Admiral', rather than small, medium or large, for example.
 
 
+## Testing
+### Validation.
+The programme was run through the Code Institute [pep8 linter]('https://pep8ci.herokuapp.com/') with no issues.
+![pep8 validation](assets/images/pep8civalidation.png)
+
+
 
 
 ## Reminders

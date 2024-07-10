@@ -228,10 +228,12 @@ def main_game():
 
         """Add ships to player and enemy seas"""
         enemy_ships = GameSize.add_ships(enemy_sea, fleet_size, x_axis, y_axis)
-        friendly_ships = GameSize.add_ships(friendly_sea, fleet_size, x_axis, y_axis)
+        friendly_ships = GameSize.add_ships(
+            friendly_sea, fleet_size, x_axis, y_axis)
 
         """Resolve combat"""
-        enemy_fleet_size, friendly_fleet_size = combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis)
+        enemy_fleet_size, friendly_fleet_size = combat(
+                fleet_size, enemy_ships, friendly_ships, x_axis, y_axis)
 
         """Track combat. game ends when one player looses all their ships."""
         if enemy_fleet_size == 0 and friendly_fleet_size > 0:
@@ -242,7 +244,8 @@ def main_game():
             print('All the ships got sunk! Everyone loses!')
 
         """Check to see if player wants to play again"""
-        play_again = input("\nPress any key to play again, or enter 'Q' to quit: ")
+        play_again = input('\nPress any key to play again'
+                           ' or enter "Q" to quit: ')
         if play_again.lower() == 'q':
             print("\nThanks for playing. Goodbye!")
             play = False
