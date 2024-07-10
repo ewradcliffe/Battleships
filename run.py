@@ -87,8 +87,8 @@ def enemy_shot(game_grid, x_axis, y_axis):
     """
     Function for enemy shooting. Picks a grid square at random.
     """
-    random_x_axis = random.randint(0, x_axis-1)
-    random_y_axis = random.randint(0, y_axis-1)
+    random_x_axis = random.randint(1, x_axis-1)
+    random_y_axis = random.randint(1, y_axis-1)
     received_fire = take_shot(game_grid, random_x_axis, random_y_axis)
     return received_fire
 
