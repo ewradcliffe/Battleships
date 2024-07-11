@@ -7,6 +7,9 @@ The aim is to produce a battleships game played by a user to showcase use of the
 
 With the growth in popularity of mobile devices users enjoy having entertainment wherever they go. Users enjoy playing games as a way of passing time commuting or queuing, for example. Mobile games are cheaper than console or PC games. The game will therefore be designed for solo play against the computer. The player will have the option to control the game size and choose where to target their shot.
 
+I created the below psuedocode to outline the steps I would take.
+![psuedocode](assets/images/battleshipsalgorithm.pdf)
+
 ### Structure
 The game uses the Python programming language.
 
