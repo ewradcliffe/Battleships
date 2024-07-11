@@ -144,7 +144,8 @@ def hide_fleet(fleet):
 
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     """
-    Loop for the main game
+    Loop for combat. 
+    Runs until one side looses all their ships.
     """
     enemy_fleet_size = fleet_size
     friendly_fleet_size = fleet_size

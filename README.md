@@ -41,6 +41,9 @@ Whilst hosting the game in the command terminal necessarily limits the scope for
 The programme was run through the Code Institute [pep8 linter]('https://pep8ci.herokuapp.com/') with no issues.
 ![pep8 validation](assets/images/pep8civalidation.png)
 
+The initial code written to select the size of the game tested the input to see if the entry was an intager, and if so if it was equal to or less than zero, or greater than three (i.e. a test to see if the input was anything other than an integer of value 1, 2, or three). This worked in most cases. In testing however, numbers between 10 and 29 were able to get through this test (why??). I therefore rewrote the code.
+
+Another bug was found in the function which hid the ships in the enemy board. The function identifies any list items which are ships ('i.e '0') and replaces the with waves ('^') The original function mistakanly used the append method, leading to the wave being inserted at the end of the list, after the newline. Updating the function to use the insert method corrected this problem.
 
 ### Tests performed
 
@@ -56,36 +59,67 @@ The programme was run through the Code Institute [pep8 linter]('https://pep8ci.h
 | Latest version of programme deployed to Heroku | ✔ |
 
 
-## Reminders
+## Deployment
+The application was created on Gitpod using The Code Institute template (https://github.com/Code-Institute-Org/p3-template) and VS Code Plugin and deployed to Github with the following steps:
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+Login to Github, otherwise create an account.
 
-## Creating the Heroku app
+Navigate to the repository ('Explore -> 'ewradcliffe/Guess-the-country') or follow the link (https://github.com/ewradcliffe/Battleships).
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Once in the repository navigate to the 'Settings' tab.
+
+Navigate to the 'Pages' section, select the branch to deploy and save the changes.
+
+Please note that to save any changes:
+
+Save as usual
+
+To commit changes, enter 'git add .' in the terminal and then enter 'git commit -m "summerise changes."
+Once all changes are made use the command 'git push' to push changes to github.
+
+##### To fork:
+
+Click fork in the top right hand corner, and create new fork.
+
+Confirm the owner of the fork, the repository name and description.
+
+Click "Create fork".
+
+##### To clone:
+
+To clone, you must first fork the repository as per above.
+
+Click on the "Code" button and copy the URL.
+
+In Git Bash, navigate to the location you would like to create the cloned directory.
+
+Enter git clone, paste the URL, and press enter.
+
+##### Heroku
+
+The programme is deployed on Heroku ('https://ed-radcliffe-battle-ships-2fd2088ab388.herokuapp.com/')
+
+The Heroku app will update automatically, however this can take a couple of hours.
+
+To create a separate app (e.g. if you have forked the original), navigate to ('https://heroku.com') and either login, or follow the steps to create an account.
+
+To create a new app navigate to the dashboard, click on the 'New' button and click 'Create new app' from the dropdown. Give the app a name, select your region and click create app. Please note that app names need to be unique to the platform as a whole. Heroku will not accept spaces as characters. You will need to use hyphens.
+
+Navigate to the 'Settings' tab. You will need to add a Config Var called 'Port' and set this to '8000'. Please then add the two buildpacks below. Please note that they should be added in this order. You can drag-and-drop them to rearrange if needed.
+
 
 1. `heroku/python`
 2. `heroku/nodejs`
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+Navigate to the 'Deployment' tab. You will have the option to set up automatic deployment so the app is automatically updated with any changes pushed to github.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
+Then connect your GitHub repository and deploy as normal.
 
 
+## Future development.
 
-#### Testing. 
-The initial code written to select the size of the game tested the input to see if the entry was an intager, and if so if it was equal to or less than zero, or greater than three (i.e. a test to see if the input was anything other than an integer of value 1, 2, or three). This worked in most cases. In testing however, numbers between 10 and 29 were able to get through this test (why??). I therefore rewrote the code.
+Code must be placed in the `run.py` file in the Python language.
 
-Another bug was found in the function which hid the ships in the enemy board. The function identifies any list items which are ships ('i.e '0') and replaces the with waves ('^') The original function mistakanly used the append method, leading to the wave being inserted at the end of the list, after the newline. Updating the function to use the insert method corrected this problem.
+Dependencies must be placed in the `requirements.txt` file
+
+Do not edit any of the other files or your code may not deploy properly
