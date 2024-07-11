@@ -91,12 +91,12 @@ def enemy_shot(game_grid, x_axis, y_axis):
     while random_shot:
         random_x_axis = random.randint(1, x_axis)
         random_y_axis = random.randint(1, y_axis)
-        if game_grid[random_y_axis -1][random_x_axis -1]== '0':
-            game_grid[random_y_axis -1][random_x_axis -1] = 'x'
+        if game_grid[random_y_axis - 1][random_x_axis - 1] == '0':
+            game_grid[random_y_axis - 1][random_x_axis - 1] = 'x'
             random_shot = False
             return game_grid, True
-        elif game_grid[random_y_axis -1][random_x_axis -1]== '^':
-            game_grid[random_y_axis -1][random_x_axis -1] = '.'
+        elif game_grid[random_y_axis - 1][random_x_axis - 1] == '^':
+            game_grid[random_y_axis - 1][random_x_axis - 1] = '.'
             random_shot = False
             return game_grid, False
         else:

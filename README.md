@@ -42,6 +42,18 @@ The programme was run through the Code Institute [pep8 linter]('https://pep8ci.h
 ![pep8 validation](assets/images/pep8civalidation.png)
 
 
+### Tests performed
+
+| Test   |      Result      |
+|----------|:-------------:|
+| Player can only enter valid selection to select game size | ✔ |
+| Player can only enter valid target coordinates | ✔ |
+| Player can target any valid coordinates | ✔ |
+| Valid coordinates changes depending on game size | ✔ |
+| Player gets visual and textual feedback of result | ✔ |
+| Computer can hit any grid square | ✔ |
+| Computer won't target the same grid square twice | ✔ |
+| Latest version of programme deployed to Heroku | ✔ |
 
 
 ## Reminders
