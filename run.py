@@ -11,7 +11,7 @@ class GameSize:
         self.fleet_size = fleet_size
 
     """
-    Function to select game size.
+    Select game size.
     """
     def choose_game(choice):
 
