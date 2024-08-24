@@ -276,7 +276,10 @@ def main_game():
             play = False
 
 
-"""
-Start of game here:
-"""
-main_game()
+if __name__ == "__main__":
+    """
+    Start of game here:
+    """
+    main_game()
+
+
