@@ -1,6 +1,8 @@
-import colorama, os, random
+import colorama
+import os
+import random
 from colorama import Fore
-colorama.init(autoreset = True)
+colorama.init(autoreset=True)
 
 
 class GameSize:
@@ -11,7 +13,6 @@ class GameSize:
         self.x_axis = x_axis
         self.y_axis = y_axis
         self.fleet_size = fleet_size
-
 
     def choose_game(choice):
         """
@@ -35,7 +36,6 @@ class GameSize:
 
         return x_axis, y_axis, fleet_size
 
-
     def generate_grid(x, y):
         """
         Generates a list of lists based on x and y axis generated above.
@@ -52,7 +52,6 @@ class GameSize:
             y_axis.append(x_axis)
 
         return y_axis
-
 
     def add_ships(game_grid, ships, x_axis, y_axis):
         """
@@ -97,7 +96,8 @@ def enemy_shot(game_grid, x_axis, y_axis):
             game_grid[random_y_axis - 1][random_x_axis - 1] = Fore.RED + 'x'
             random_shot = False
             return game_grid, True
-        elif game_grid[random_y_axis - 1][random_x_axis - 1] == Fore.BLUE + '^':
+        elif game_grid[random_y_axis - 1][
+                random_x_axis - 1] == Fore.BLUE + '^':
             game_grid[random_y_axis - 1][random_x_axis - 1] = Fore.WHITE + '.'
             random_shot = False
             return game_grid, False
@@ -154,7 +154,7 @@ def clear_screen():
 
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     """
-    Function for resolving combat. 
+    Function for resolving combat.
     Runs until one side looses all their ships.
     """
     enemy_fleet_size = fleet_size
@@ -167,9 +167,9 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         display_friend = display_battlespace(friendly_ships)
 
         print('To shoot, please enter coordinates.'
-            f'\nPlease guess between 1 and {x_axis} '
-            f'for the x axis, and 1 and {y_axis} for the y axis.\n'
-            f'Or enter "Q" to quit the game.\n')
+              f'\nPlease guess between 1 and {x_axis} '
+              f'for the x axis, and 1 and {y_axis} for the y axis.\n'
+              f'Or enter "Q" to quit the game.\n')
 
         """
         Uncomment print statement below to print
@@ -251,8 +251,9 @@ def main_game():
                           ' Please choose a number between 1 and 4.')
                 else:
                     invalid_input = False
-            except:
-                print('Error. Please enter a number. Not a letter or special character')
+            except ValueError:
+                print('Error. Please enter a number.'
+                      'Not a letter or special character')
 
         x_axis, y_axis, fleet_size = GameSize.choose_game(choice)
 
