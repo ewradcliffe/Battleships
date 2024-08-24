@@ -166,7 +166,8 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 
         print('To shoot, please enter coordinates.'
             f'\nPlease guess between 1 and {x_axis} '
-            f'for the x axis, and 1 and {y_axis} for the y axis.\n')
+            f'for the x axis, and 1 and {y_axis} for the y axis.\n'
+            f'Or enter "Q" to quit the game.\n')
 
         """
         Uncomment print statement below to print
@@ -194,6 +195,11 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
                           f' Please guess between 1 and {y_axis}.')
                 else:
                     invalid_guess = False
+
+            elif x.lower() == 'q' or y.lower() == 'q':
+                print('Thanks for playing. Goodbye!')
+                exit()
+
             else:
                 print('Guess must be a number.'
                       ' Not a letter or special character')
