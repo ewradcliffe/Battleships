@@ -164,6 +164,10 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         display_enemy = display_battlespace(enemy_ships)
         display_friend = display_battlespace(friendly_ships)
 
+        print('To shoot, please enter coordinates.'
+            f'\nPlease guess between 1 and {x_axis} '
+            f'for the x axis, and 1 and {y_axis} for the y axis.\n')
+
         """
         Uncomment print statement below to print
         grid which displays enemy ship.
@@ -243,9 +247,9 @@ def main_game():
                 print('Error. Please enter a number. Not a letter or special character')
 
         x_axis, y_axis, fleet_size = GameSize.choose_game(choice)
-        print('\nTo shoot, please enter coordinates.'
-              f'\n\nPlease guess between 1 and {x_axis} '
-              f'for the x axis, and 1 and {y_axis} for the y axis.\n')
+
+        """Clear previous rounds from terminal"""
+        clear_screen()
 
         """Generate a sea each for player and enemy"""
         enemy_sea = GameSize.generate_grid(x_axis, y_axis)
