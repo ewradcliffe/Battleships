@@ -232,15 +232,15 @@ def main_game():
         invalid_input = True
         while invalid_input:
             choice = input('\nWhat size game would you like to play? ')
-            if choice.isnumeric():
+            try:
                 choice = int(choice)
                 if choice < 1 or choice > 4:
                     print('Invalid choice.'
                           ' Please choose a number between 1 and 4.')
                 else:
                     invalid_input = False
-            else:
-                print('Error. Please enter a number')
+            except:
+                print('Error. Please enter a number. Not a letter or special character')
 
         x_axis, y_axis, fleet_size = GameSize.choose_game(choice)
         print('\nTo shoot, please enter coordinates.'
