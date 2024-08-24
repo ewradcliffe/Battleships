@@ -1,4 +1,7 @@
-import os, random
+import colorama, os, random
+from colorama import Fore
+colorama.init(autoreset = True)
+
 
 class GameSize:
     """
@@ -44,7 +47,7 @@ class GameSize:
             x_axis = []
             j = 0
             while x > j:
-                x_axis.append('^')
+                x_axis.append(Fore.BLUE + '^')
                 j += 1
             y_axis.append(x_axis)
 
@@ -59,10 +62,10 @@ class GameSize:
         while ships > 0:
             random_x_axis = random.randint(0, x_axis-1)
             random_y_axis = random.randint(0, y_axis-1)
-            if game_grid[random_y_axis][random_x_axis] == '0':
+            if game_grid[random_y_axis][random_x_axis] == Fore.WHITE + '0':
                 continue
             else:
-                game_grid[random_y_axis][random_x_axis] = '0'
+                game_grid[random_y_axis][random_x_axis] = Fore.WHITE + '0'
                 ships -= 1
 
         return game_grid
@@ -74,12 +77,11 @@ def take_shot(game_grid, x, y):
     Takes player guess of x and y axis and deducts one
     to compare with index positions in list.
     """
-
-    if game_grid[y-1][x-1] == '0':
-        game_grid[y-1][x-1] = 'x'
+    if game_grid[y-1][x-1] == Fore.WHITE + '0':
+        game_grid[y-1][x-1] = Fore.RED + 'x'
         return game_grid, True
     else:
-        game_grid[y-1][x-1] = '.'
+        game_grid[y-1][x-1] = Fore.WHITE + '.'
         return game_grid, False
 
 
@@ -91,12 +93,12 @@ def enemy_shot(game_grid, x_axis, y_axis):
     while random_shot:
         random_x_axis = random.randint(1, x_axis)
         random_y_axis = random.randint(1, y_axis)
-        if game_grid[random_y_axis - 1][random_x_axis - 1] == '0':
-            game_grid[random_y_axis - 1][random_x_axis - 1] = 'x'
+        if game_grid[random_y_axis - 1][random_x_axis - 1] == Fore.WHITE + '0':
+            game_grid[random_y_axis - 1][random_x_axis - 1] = Fore.RED + 'x'
             random_shot = False
             return game_grid, True
-        elif game_grid[random_y_axis - 1][random_x_axis - 1] == '^':
-            game_grid[random_y_axis - 1][random_x_axis - 1] = '.'
+        elif game_grid[random_y_axis - 1][random_x_axis - 1] == Fore.BLUE + '^':
+            game_grid[random_y_axis - 1][random_x_axis - 1] = Fore.WHITE + '.'
             random_shot = False
             return game_grid, False
         else:
@@ -134,9 +136,9 @@ def hide_fleet(fleet):
     for ship in copy_enemy_ships:
         index = 0
         for section in ship:
-            if section == '0':
-                ship.remove('0')
-                ship.insert(index, '^')
+            if section == Fore.WHITE + '0':
+                ship.remove(Fore.WHITE + '0')
+                ship.insert(index, Fore.BLUE + '^')
             index += 1
 
     return copy_enemy_ships
@@ -291,5 +293,3 @@ if __name__ == "__main__":
     Start of game here:
     """
     main_game()
-
-
