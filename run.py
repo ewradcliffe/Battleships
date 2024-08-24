@@ -1,4 +1,4 @@
-import random
+import os, random
 
 class GameSize:
     """
@@ -142,6 +142,14 @@ def hide_fleet(fleet):
     return copy_enemy_ships
 
 
+def clear_screen():
+    """
+    Function to clear previous rounds from terminal.
+    From https://www.geeksforgeeks.org/clear-screen-python/
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+
+
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     """
     Function for resolving combat. 
@@ -190,6 +198,9 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 
         """Enemy shot"""
         friendly_ships, enemy_fire = enemy_shot(friendly_ships, x_axis, y_axis)
+
+        """Clear previous rounds from terminal"""
+        clear_screen()
 
         if friendly_fire is True and enemy_fire is True:
             enemy_fleet_size -= 1
