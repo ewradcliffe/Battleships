@@ -1,6 +1,5 @@
 import random
 
-
 class GameSize:
     """
     Class to regulate the size of the game
@@ -10,11 +9,11 @@ class GameSize:
         self.y_axis = y_axis
         self.fleet_size = fleet_size
 
-    """
-    Select game size.
-    """
-    def choose_game(choice):
 
+    def choose_game(choice):
+        """
+        Select game size.
+        """
         if choice == 1:
             x_axis = 5
             y_axis = 3
@@ -33,11 +32,11 @@ class GameSize:
 
         return x_axis, y_axis, fleet_size
 
-    """
-    Generates a list of lists based on x and y axis generated above.
-    """
-    def generate_grid(x, y):
 
+    def generate_grid(x, y):
+        """
+        Generates a list of lists based on x and y axis generated above.
+        """
         y_axis = []
         i = 0
         while y > i:
@@ -51,12 +50,12 @@ class GameSize:
 
         return y_axis
 
-    """
-    Add ships to the grid.
-    Randomly selects an index for the y axis and x axis and inserts an '0'
-    """
-    def add_ships(game_grid, ships, x_axis, y_axis):
 
+    def add_ships(game_grid, ships, x_axis, y_axis):
+        """
+        Add ships to the grid.
+        Randomly selects an index for the y axis and x axis and inserts an '0'
+        """
         while ships > 0:
             random_x_axis = random.randint(0, x_axis-1)
             random_y_axis = random.randint(0, y_axis-1)
@@ -72,7 +71,8 @@ class GameSize:
 def take_shot(game_grid, x, y):
     """
     Function to resolve player shot.
-    Takes player guess of x and y axis and compares them with the grid.
+    Takes player guess of x and y axis and deducts one
+    to compare with index positions in list.
     """
 
     if game_grid[y-1][x-1] == '0':
@@ -144,7 +144,7 @@ def hide_fleet(fleet):
 
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     """
-    Loop for combat. 
+    Function for resolving combat. 
     Runs until one side looses all their ships.
     """
     enemy_fleet_size = fleet_size
@@ -157,8 +157,8 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         display_friend = display_battlespace(friendly_ships)
 
         """
-        Uncomment print statement below to
-        See where the enemy ships are located.
+        Uncomment print statement below to print
+        grid which displays enemy ship.
         print(display_enemy)
         """
         print('Enemy Fleet:')
@@ -208,6 +208,9 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 
 
 def main_game():
+    """
+    Function containing the game.
+    """
     play = True
     while play:
         print('Welcome to battleships.'
