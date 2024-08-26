@@ -70,6 +70,14 @@ class GameSize:
         return game_grid
 
 
+def clear_screen():
+    """
+    Function to clear previous rounds from terminal.
+    From https://www.geeksforgeeks.org/clear-screen-python/
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+
+
 def player_shot(game_grid, x_axis, y_axis):
     """
     Function to resolve player shot.
@@ -86,6 +94,11 @@ def player_shot(game_grid, x_axis, y_axis):
         if y.lower() == 'm':
             main_game()
 
+        """
+        Clear screen in case invalid data is entered
+        Needed to prevent errors in Heroku.
+        """
+        clear_screen()
         if x.isnumeric() and y.isnumeric():
             x = int(x)
             y = int(y)
@@ -172,14 +185,6 @@ def hide_fleet(fleet):
             index += 1
 
     return copy_enemy_ships
-
-
-def clear_screen():
-    """
-    Function to clear previous rounds from terminal.
-    From https://www.geeksforgeeks.org/clear-screen-python/
-    """
-    os.system("cls" if os.name == "nt" else "clear")
 
 
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
