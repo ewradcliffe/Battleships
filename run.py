@@ -28,7 +28,7 @@ class GameSize:
             fleet_size = 3
         elif choice == 3:
             x_axis = 20
-            y_axis = 8
+            y_axis = 6
             fleet_size = 5
         elif choice == 4:
             print('Thanks for playing. See you next time!')
@@ -223,17 +223,17 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         """Clear previous rounds from terminal"""
         clear_screen()
 
-        if friendly_fire is True and enemy_fire is True:         
+        if friendly_fire is True and enemy_fire is True:
             enemy_fleet_size -= 1
             friendly_fleet_size -= 1
             print('You hit, the enemy hit.\n')
-        elif friendly_fire is True and enemy_fire is False:           
+        elif friendly_fire is True and enemy_fire is False:
             enemy_fleet_size -= 1
             print('You hit, the enemy missed.\n')
-        elif friendly_fire is False and enemy_fire is True:         
+        elif friendly_fire is False and enemy_fire is True:
             print('You missed, the enemy hit.\n')
             friendly_fleet_size -= 1
-        elif friendly_fire is False and enemy_fire is False:      
+        elif friendly_fire is False and enemy_fire is False:
             print('You missed, the enemy missed.\n')
 
     return enemy_fleet_size, friendly_fleet_size
