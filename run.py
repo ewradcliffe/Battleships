@@ -186,7 +186,7 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
     """
     Function for resolving combat.
     Runs until one side looses all their ships.
-    Starts by clearing previous rounds from terminal.
+    Starts by clearing menu from terminal.
     """
     clear_screen()
 
@@ -219,6 +219,9 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 
         """Enemy shot"""
         friendly_ships, enemy_fire = enemy_shot(friendly_ships, x_axis, y_axis)
+
+        """Clear previous rounds from terminal"""
+        clear_screen()
 
         if friendly_fire is True and enemy_fire is True:
             enemy_fleet_size -= 1
