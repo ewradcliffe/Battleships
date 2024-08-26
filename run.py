@@ -224,22 +224,22 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         clear_screen()
 
         if friendly_fire is True and enemy_fire is True:
-            clear_screen()
+           
             enemy_fleet_size -= 1
             friendly_fleet_size -= 1
             print('You hit, the enemy hit.\n')
         elif friendly_fire is True and enemy_fire is False:
-            clear_screen()
+            
             enemy_fleet_size -= 1
             print('You hit, the enemy missed.\n')
         elif friendly_fire is False and enemy_fire is True:
-            clear_screen()
+            
             print('You missed, the enemy hit.\n')
             friendly_fleet_size -= 1
         elif friendly_fire is False and enemy_fire is False:
-            clear_screen()
+            
             print('You missed, the enemy missed.\n')
-
+    # clear_screen()
     return enemy_fleet_size, friendly_fleet_size
 
 
@@ -271,6 +271,7 @@ def main_game():
                 print('Error. Please enter a number.'
                       'Not a letter or special character')
 
+        clear_screen()
         x_axis, y_axis, fleet_size = GameSize.choose_game(choice)
 
         """Generate a sea each for player and enemy"""
