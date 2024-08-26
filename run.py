@@ -70,9 +70,39 @@ class GameSize:
         return game_grid
 
 
-def take_shot(game_grid, x, y):
+def player_shot(game_grid, x_axis, y_axis):
     """
     Function to resolve player shot.
+    Asks player to guess coordinates of x an y axis.
+    Also gives player opportunity to return to main menu.
+    """
+    invalid_guess = True
+    while invalid_guess:
+        x = input('Please guess the x axis: ')
+        if x.lower() == 'm':
+            main_game()
+
+        y = input('Please guess the y axis: ')
+        if y.lower() == 'm':
+            main_game()
+
+        if x.isnumeric() and y.isnumeric():
+            x = int(x)
+            y = int(y)
+            if x <= 0 or x > x_axis:
+                print('X axis guess out of range.'
+                      f' Please guess between 1 and {x_axis}.')
+            elif y <= 0 or y > y_axis:
+                print('Y axis guess out of range.'
+                      f' Please guess between 1 and {y_axis}.')
+            else:
+                invalid_guess = False
+
+        else:
+            print('Guess must be a number.'
+                  ' Not a letter or special character')
+
+    """
     Takes player guess of x and y axis and deducts one
     to compare with index positions in list.
     """
@@ -182,33 +212,7 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         print(display_friend)
 
         """Player shot"""
-        invalid_guess = True
-        while invalid_guess:
-            x = input('Please guess the x axis: ')
-            if x.lower() == 'm':
-                main_game()
-
-            y = input('Please guess the y axis: ')
-            if y.lower() == 'm':
-                main_game()
-
-            if x.isnumeric() and y.isnumeric():
-                x = int(x)
-                y = int(y)
-                if x <= 0 or x > x_axis:
-                    print('X axis guess out of range.'
-                          f' Please guess between 1 and {x_axis}.')
-                elif y <= 0 or y > y_axis:
-                    print('Y axis guess out of range.'
-                          f' Please guess between 1 and {y_axis}.')
-                else:
-                    invalid_guess = False
-
-            else:
-                print('Guess must be a number.'
-                      ' Not a letter or special character')
-
-        enemy_ships, friendly_fire = take_shot(enemy_ships, x, y)
+        enemy_ships, friendly_fire = player_shot(enemy_ships, x_axis, y_axis)
 
         """Enemy shot"""
         friendly_ships, enemy_fire = enemy_shot(friendly_ships, x_axis, y_axis)
