@@ -28,7 +28,7 @@ class GameSize:
             fleet_size = 3
         elif choice == 3:
             x_axis = 20
-            y_axis = 6
+            y_axis = 5
             fleet_size = 5
         elif choice == 4:
             print('Thanks for playing. See you next time!')
