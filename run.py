@@ -1,6 +1,7 @@
 import colorama
 import os
 import random
+import time
 from colorama import Fore
 colorama.init(autoreset=True)
 
@@ -180,6 +181,7 @@ def clear_screen():
     From https://www.geeksforgeeks.org/clear-screen-python/
     """
     os.system("cls" if os.name == "nt" else "clear")
+    time.sleep(0.1)
 
 
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
@@ -223,23 +225,19 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         """Clear previous rounds from terminal"""
         clear_screen()
 
-        if friendly_fire is True and enemy_fire is True:
-           
+        if friendly_fire is True and enemy_fire is True:         
             enemy_fleet_size -= 1
             friendly_fleet_size -= 1
             print('You hit, the enemy hit.\n')
-        elif friendly_fire is True and enemy_fire is False:
-            
+        elif friendly_fire is True and enemy_fire is False:           
             enemy_fleet_size -= 1
             print('You hit, the enemy missed.\n')
-        elif friendly_fire is False and enemy_fire is True:
-            
+        elif friendly_fire is False and enemy_fire is True:         
             print('You missed, the enemy hit.\n')
             friendly_fleet_size -= 1
-        elif friendly_fire is False and enemy_fire is False:
-            
+        elif friendly_fire is False and enemy_fire is False:      
             print('You missed, the enemy missed.\n')
-    # clear_screen()
+
     return enemy_fleet_size, friendly_fleet_size
 
 
