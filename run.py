@@ -223,15 +223,15 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
         if friendly_fire is True and enemy_fire is True:
             enemy_fleet_size -= 1
             friendly_fleet_size -= 1
-            print('\nYou hit, the enemy hit.')
+            print('You hit, the enemy hit.\n')
         elif friendly_fire is True and enemy_fire is False:
             enemy_fleet_size -= 1
-            print('\nYou hit, the enemy missed.')
+            print('You hit, the enemy missed.\n')
         elif friendly_fire is False and enemy_fire is True:
-            print('\nYou missed, the enemy hit.')
+            print('You missed, the enemy hit.\n')
             friendly_fleet_size -= 1
         elif friendly_fire is False and enemy_fire is False:
-            print('\nYou missed, the enemy missed.')
+            print('You missed, the enemy missed.\n')
 
     return enemy_fleet_size, friendly_fleet_size
 
@@ -239,7 +239,10 @@ def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
 def main_game():
     """
     Function containing the game.
+    Starts by clearing previous rounds from terminal.
     """
+    clear_screen()
+
     play = True
     while play:
         print('Welcome to battleships.'
@@ -262,9 +265,6 @@ def main_game():
                       'Not a letter or special character')
 
         x_axis, y_axis, fleet_size = GameSize.choose_game(choice)
-
-        """Clear previous rounds from terminal"""
-        clear_screen()
 
         """Generate a sea each for player and enemy"""
         enemy_sea = GameSize.generate_grid(x_axis, y_axis)
