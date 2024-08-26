@@ -1,7 +1,6 @@
 import colorama
 import os
 import random
-import time
 from colorama import Fore
 colorama.init(autoreset=True)
 
@@ -181,7 +180,6 @@ def clear_screen():
     From https://www.geeksforgeeks.org/clear-screen-python/
     """
     os.system("cls" if os.name == "nt" else "clear")
-    time.sleep(0.1)
 
 
 def combat(fleet_size, enemy_ships, friendly_ships, x_axis, y_axis):
