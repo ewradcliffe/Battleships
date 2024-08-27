@@ -3,6 +3,10 @@ import os
 import random
 from colorama import Fore
 colorama.init(autoreset=True)
+"""
+This piece of code is taken from the Colorama lesson by
+Tech with Tim (https://www.youtube.com/watch?v=u51Zjlnui4Y)
+"""
 
 
 class GameSize:
@@ -73,7 +77,8 @@ class GameSize:
 def clear_screen():
     """
     Function to clear previous rounds from terminal.
-    From https://www.geeksforgeeks.org/clear-screen-python/
+    From https://stackoverflow.com/questions/2084508/
+    clear-the-terminal-in-python
     """
     os.system("cls" if os.name == "nt" else "clear")
 
